@@ -1,0 +1,17 @@
+<% if current_user.present? %>
+	<%= link_to "Sign Out", destroy_user_session_path, method: :delete, style:" float:right" %>
+	<br>
+	<hr>
+	<% if current_user.has_role? :admin %>
+		<%= link_to "Create New Job", job_posts_path %>
+		<%= link_to "New Board", new_board_path, style: " float: right "%>
+	<%else%>
+		<% @jobs.each do |job| %>
+			<p><%= job.job_title %></p>
+			<p><%= job.job_description %></p>
+			<p><%= job.closing_date %></p>
+			<p><%= link_to "Apply", new_job_application_path(:job => job.id ) %></p>
+			<hr>
+		<%end%>
+	<%end%>	
+<%end%>

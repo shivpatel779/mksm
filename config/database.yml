@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: root
+  password: root
+  host: localhost
+
+development:
+  <<: *default
+  database: job_posting_development
+
+production:
+  <<: *default
+  database: job_posting_production

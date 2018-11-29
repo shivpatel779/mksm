@@ -1,0 +1,39 @@
+<%= form_with(model: job_post, local: true) do |form| %>
+  <% if job_post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(job_post.errors.count, "error") %> prohibited this job_post from being saved:</h2>
+
+      <ul>
+      <% job_post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :board_id %>
+    <%#= form. :board_id, id: :job_post_job_title %>
+    <%= form.collection_select :board_id, Board.order(:name),:id,:name, include_blank: true %>
+
+  </div>
+
+  <div class="field">
+    <%= form.label :job_title %>
+    <%= form.text_field :job_title, id: :job_post_job_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :job_description %>
+    <%= form.text_field :job_description, id: :job_post_job_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :closing_date %>
+    <%= form.date_select :closing_date, id: :job_post_closing_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
